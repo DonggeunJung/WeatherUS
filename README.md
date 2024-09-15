@@ -23,6 +23,6 @@
 <br>
 < Additional Infomation >
 <br>
-GitHub Link : https://github.com/DonggeunJung/WeatherInUS
+GitHub Link : https://github.com/DonggeunJung/WeatherUS
 <br>
 Any question => Email : topsan72@gmail.com / Author : Donggeun Jung (Dennis)
