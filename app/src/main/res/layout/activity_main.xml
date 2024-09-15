@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="weather" type="com.example.weatherus.data.Weather" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.MainActivity">
+
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="30dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvStateTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/state" />
+
+                <LinearLayout
+                    android:id="@+id/layoutState"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/black">
+
+                    <TextView
+                        android:id="@+id/tvState"
+                        style="@style/textEdit"
+                        android:layout_height="30dp"
+                        android:layout_marginBottom="1dp"
+                        android:text=""
+                        android:background="@color/back" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvCityTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="@string/city" />
+
+                <EditText
+                    android:id="@+id/etCity"
+                    style="@style/textEdit"
+                    android:text="" />
+
+                <Button
+                    android:id="@+id/btnWeather"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Get weather"
+                    android:onClick="onBtnWeather" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layoutInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:paddingHorizontal="0dp">
+
+                    <TextView
+                        android:id="@+id/tvCity"
+                        style="@style/textInfoO3"
+                        android:text="@{weather.cityName(context)}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toTopOf="@+id/tvTemp"/>
+
+                    <ImageView
+                        android:id="@+id/ivWeather"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:maxHeight="40dp"
+                        android:maxWidth="40dp"
+                        android:scaleType="fitCenter"
+                        app:imageUrl="@{weather.iconUrl()}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="@+id/tvTemp"/>
+
+                    <TextView
+                        android:id="@+id/tvTemp"
+                        style="@style/textInfoO4"
+                        android:layout_marginTop="20dp"
+                        android:text="@{weather.tempFahrenheit(context)}"
+                        app:layout_constraintStart_toEndOf="@+id/ivWeather"
+                        app:layout_constraintTop_toBottomOf="@+id/tvCity"
+                        app:layout_constraintBottom_toTopOf="@+id/tvfeelsLikeTitle"/>
+
+                    <TextView
+                        android:id="@+id/tvMinMax"
+                        style="@style/textInfoO1"
+                        android:layout_marginStart="20dp"
+                        android:text="@{weather.minMax(context)}"
+                        app:layout_constraintStart_toEndOf="@+id/tvTemp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tvTemp"/>
+
+                    <TextView
+                        android:id="@+id/tvfeelsLikeTitle"
+                        style="@style/textInfoO2"
+                        android:layout_marginTop="20dp"
+                        android:text="Feels like"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvTemp"
+                        app:layout_constraintBottom_toTopOf="@+id/tvWind"/>
+
+                    <TextView
+                        android:id="@+id/tvfeelsLike"
+                        style="@style/textInfoO2"
+                        android:layout_marginStart="5dp"
+                        android:text="@{weather.feelsLikeFahrenheit(context)}"
+                        app:layout_constraintStart_toEndOf="@+id/tvfeelsLikeTitle"
+                        app:layout_constraintTop_toTopOf="@+id/tvfeelsLikeTitle"/>
+
+                    <TextView
+                        android:id="@+id/tvWeatherDescription"
+                        style="@style/textInfoO2"
+                        android:layout_marginStart="20dp"
+                        android:text="@{weather.weatherDescription()}"
+                        app:layout_constraintStart_toEndOf="@+id/tvfeelsLike"
+                        app:layout_constraintTop_toTopOf="@+id/tvfeelsLikeTitle"/>
+
+                    <TextView
+                        android:id="@+id/tvWind"
+                        style="@style/textInfoO1"
+                        android:layout_marginTop="20dp"
+                        android:text="@{weather.windDescription(context)}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvfeelsLikeTitle"
+                        app:layout_constraintBottom_toTopOf="@+id/tvHumidity"/>
+
+                    <TextView
+                        android:id="@+id/tvPressure"
+                        style="@style/textInfoO1"
+                        android:layout_marginStart="20dp"
+                        android:text="@{weather.pressure(context)}"
+                        app:layout_constraintStart_toEndOf="@+id/tvWind"
+                        app:layout_constraintTop_toTopOf="@+id/tvWind"/>
+
+                    <TextView
+                        android:id="@+id/tvHumidity"
+                        style="@style/textInfoO1"
+                        android:layout_marginTop="20dp"
+                        android:text="@{weather.humidity(context)}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvWind"/>
+
+                    <TextView
+                        android:id="@+id/tvVisibility"
+                        style="@style/textInfoO1"
+                        android:layout_marginStart="20dp"
+                        android:text="@{weather.visibility(context)}"
+                        app:layout_constraintStart_toEndOf="@+id/tvHumidity"
+                        app:layout_constraintTop_toTopOf="@+id/tvHumidity"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
